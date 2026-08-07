@@ -4,8 +4,8 @@
 // const fechaReveal = new Date('August 30, 2026 00:00:00').getTime(); // (Guardamos la original comentada)
 
 // TRUCO DE PRUEBA: Suma 2 minutos (120,000 milisegundos) al momento en que abres la web
-// const fechaReveal = new Date('August 30, 2026 00:00:00').getTime();
-const fechaReveal = new Date().getTime() + 1*60*1000;
+const fechaReveal = new Date('August 30, 2026 00:00:00').getTime();
+// const fechaReveal = new Date().getTime() + 1*60*1000;
 
 function actualizarCuentaRegresiva() {
     const ahora = new Date().getTime();
