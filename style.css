@@ -1,10 +1,15 @@
-/* --- COLORES Y FONDO GENERAL --- */
 body {
     background-color: #F6F4EB;
     color: #1a2b4c;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 40px 20px;
     margin: 0;
+    background-image: url('fondo-venecia.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    background-color: rgba(246, 244, 235, 0.85); 
 }
 
 .contenedor-principal {
@@ -20,14 +25,12 @@ body {
     text-transform: uppercase;
 }
 
-/* --- CUADRÍCULA (GRID) --- */
 .grid-canciones {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 25px;
 }
 
-/* --- ESTILO BASE TARJETAS --- */
 .card {
     background-color: #1B263B;
     border-radius: 12px;
@@ -43,7 +46,6 @@ body {
     transform: translateY(-5px);
 }
 
-/* --- TARJETAS BLOQUEADAS --- */
 .card-bloqueada {
     display: flex;
     justify-content: center;
@@ -88,7 +90,6 @@ body {
 .card-bloqueada:hover .icono-centro { display: none; }
 .card-bloqueada:hover .timer { display: block; }
 
-/* Efecto censurado */
 .censurado {
     display: inline-block;
     background-color: currentColor;
@@ -98,7 +99,6 @@ body {
     border-radius: 2px;
 }
 
-/* --- TARJETA DESBLOQUEADA --- */
 .card-activa {
     display: flex;
     align-items: center;
@@ -143,7 +143,6 @@ body {
     text-overflow: ellipsis;
 }
 
-/* --- REPRODUCTORES DE AUDIO --- */
 .reproductor-custom {
     display: flex;
     align-items: center;
@@ -217,7 +216,6 @@ body {
     box-shadow: 0 0 4px rgba(0,0,0,0.5); 
 }
 
-/* --- VENTANA EMERGENTE (MODAL) --- */
 .modal-fondo {
     display: none; 
     position: fixed;
@@ -275,7 +273,6 @@ body {
 .reproductor-modal { margin-top: 0; }
 .reproductor-modal .btn-circular { background-color: #7b52c9; }
 
-/* Barra de progreso funcional del modal con sus colores rosas/morados */
 .barra-modal { 
     flex: 1; 
     min-width: 0; 
@@ -293,7 +290,7 @@ body {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #e25e97; /* Color rosa brillante */
+    background: #e25e97;
     cursor: pointer;
     box-shadow: 0 0 4px rgba(0,0,0,0.5); 
 }
@@ -315,7 +312,6 @@ body {
     margin-top: 15px;
     margin-bottom: 25px;
 }
-/* --- ESTADOS DE AUTO-DESBLOQUEO --- */
 .estado-bloqueado {
     display: flex;
     flex-direction: column;
@@ -326,7 +322,6 @@ body {
 }
 
 .estado-desbloqueado {
-    /* Por defecto estará oculto mediante código */
     align-items: center;
     width: 100%;
     height: 100%;
@@ -342,9 +337,9 @@ body {
 }
 @media (max-width: 768px) {
     .modal-contenido {
-        flex-direction: column; /* Pone los elementos en vertical */
+        flex-direction: column;
         height: 90vh;
-        overflow-y: auto; /* Permite scroll a todo el modal */
+        overflow-y: auto;
         padding: 25px;
     }
     
@@ -354,12 +349,12 @@ body {
     }
     
     .modal-der {
-        overflow-y: visible; /* Quitamos el scroll individual de la letra */
+        overflow-y: visible;
         padding-right: 0;
     }
     
     .modal-imagen-grande {
-        width: 60%; /* Hace la carátula un poco más pequeña en móvil */
+        width: 60%;
         margin: 0 auto 20px auto;
         display: block;
     }

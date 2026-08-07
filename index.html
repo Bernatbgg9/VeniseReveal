@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reveal de Nuestro Disco</title>
+    <title>REVEAL DISCO VENISES</title>
         <meta property="og:title" content="¡Reveal de VENISE!">
         <meta property="og:description" content="Entra para descubrir el nuevo disco que hemos creado. ¡Ya casi es la hora!">
-        <meta property="og:image" content="https://TU-WEB.com/caratula-principal.jpg"> <!-- Tendrás que poner la URL real cuando la subas a internet -->
+        <meta property="og:image" content="https://bernatbgg9.github.io/VeniseReveal/"> 
         <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
     <div class="contenedor-principal">
-        <h1 class="titulo-pagina">VENISE</h1>
+        <h1 class="titulo-pagina">VENISES ÁLBUM</h1>
 
         <div class="grid-canciones">
             
-            <!-- Canción 1 (AUTO-DESBLOQUEO) -->
             <div class="card card-bloqueada card-automatica">
                 <div class="estado-bloqueado">
                     <span class="numero-track">1</span>
@@ -43,7 +42,6 @@
                 </div>
             </div>
 
-            <!-- Canción 2 (AUTO-DESBLOQUEO) -->
             <div class="card card-bloqueada card-automatica">
                 <div class="estado-bloqueado">
                     <span class="numero-track">2</span>
@@ -69,7 +67,6 @@
                 </div>
             </div>
 
-            <!-- Canción 3 (AUTO-DESBLOQUEO) -->
             <div class="card card-bloqueada card-automatica">
                 <div class="estado-bloqueado">
                     <span class="numero-track">3</span>
@@ -95,7 +92,6 @@
                 </div>
             </div>
 
-            <!-- Canción 4 (AUTO-DESBLOQUEO) -->
             <div class="card card-bloqueada card-automatica">
                 <div class="estado-bloqueado">
                     <span class="numero-track">4</span>
@@ -121,7 +117,6 @@
                 </div>
             </div>
 
-            <!-- Canción 5 (AUTO-DESBLOQUEO) -->
             <div class="card card-bloqueada card-automatica">
                 <div class="estado-bloqueado">
                     <span class="numero-track">5</span>
@@ -147,7 +142,6 @@
                 </div>
             </div>
 
-            <!-- Canción 6 (AUTO-DESBLOQUEO) -->
             <div class="card card-bloqueada card-automatica">
                 <div class="estado-bloqueado">
                     <span class="numero-track">6</span>
@@ -173,10 +167,9 @@
                 </div>
             </div>
 
-            <!-- Canción 7 (YA DESBLOQUEADA) -->
             <div class="card card-activa activa-brillo">
                 <div class="estado-desbloqueado" style="display: flex;">
-                    <img src="caratula.jpg" alt="Carátula" class="card-imagen" style="cursor: pointer;" title="Ver letra" data-track="track7">
+                    <img src="caratula7.jpg" alt="Carátula" class="card-imagen" style="cursor: pointer;" title="Ver letra" data-track="track7">
                     <div class="card-info">
                         <h3 class="track-title">7. La Noticia - Remix</h3>
                         <audio id="audio-cancion7" src="la-noticia-remix.mp3"></audio>
@@ -193,7 +186,6 @@
                 </div>
             </div>
 
-            <!-- Canción 8 (AUTO-DESBLOQUEO) -->
             <div class="card card-bloqueada card-automatica">
                 <div class="estado-bloqueado">
                     <span class="numero-track">8</span>
@@ -219,7 +211,6 @@
                 </div>
             </div>
 
-            <!-- Canción 9 (AUTO-DESBLOQUEO) -->
             <div class="card card-bloqueada card-automatica">
                 <div class="estado-bloqueado">
                     <span class="numero-track">9</span>
@@ -245,7 +236,6 @@
                 </div>
             </div>
 
-            <!-- Canción 10 (AUTO-DESBLOQUEO) -->
             <div class="card card-bloqueada card-automatica">
                 <div class="estado-bloqueado">
                     <span class="numero-track">10</span>
@@ -271,7 +261,6 @@
                 </div>
             </div>
 
-            <!-- Canción 11 (AUTO-DESBLOQUEO) -->
             <div class="card card-bloqueada card-automatica">
                 <div class="estado-bloqueado">
                     <span class="numero-track">11</span>
@@ -300,17 +289,15 @@
         </div>
     </div>
 
-    <!-- VENTANA EMERGENTE (MODAL) DE LA LETRA -->
     <div id="modal-letra" class="modal-fondo">
         <div class="modal-contenido">
             <button id="cerrar-modal" class="btn-cerrar">&times;</button>
             
             <div class="modal-izq">
-                <img src="caratula.jpg" alt="Carátula Grande" class="modal-imagen-grande">
+                <img src="caratula7.jpg" alt="Carátula Grande" class="modal-imagen-grande">
                 <h2 class="modal-titulo">La Noticia - Remix</h2>
                 
                 <div class="reproductor-custom reproductor-modal">
-                    <!-- REPRODUCTOR DEL MODAL -->
                     <button id="btn-play-pause-modal" class="btn-circular">
                         <svg id="icono-play-modal" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         <svg id="icono-pause-modal" viewBox="0 0 24 24" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
@@ -321,9 +308,8 @@
                 </div>
             </div>
 
-            <!-- Columna Derecha (Se rellenará sola con el JSON) -->
             <div class="modal-der" id="contenedor-letras">
-                <!-- El JavaScript meterá los párrafos aquí mágicamente -->
+
             </div>
         </div>
     </div>
