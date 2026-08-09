@@ -1,6 +1,6 @@
 
-// const fechaReveal = new Date('August 30, 2026 00:00:00').getTime();
-const fechaReveal = new Date().getTime() + (1* 60 * 1000);
+const fechaReveal = new Date('August 30, 2026 00:00:00').getTime();
+// const fechaReveal = new Date().getTime() + (1* 60 * 1000);
 
 function actualizarCuentaRegresiva() {
     const ahora = new Date().getTime();
