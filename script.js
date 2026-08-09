@@ -1,6 +1,5 @@
-
+// const fechaReveal = new Date().getTime() + (1*60*1000);
 const fechaReveal = new Date('August 30, 2026 00:00:00').getTime();
-// const fechaReveal = new Date().getTime() + (1* 60 * 1000);
 
 function actualizarCuentaRegresiva() {
     const ahora = new Date().getTime();
@@ -45,8 +44,8 @@ function formatearTiempo(segundos) {
     return `${min}:${seg < 10 ? '0' : ''}${seg}`;
 }
 
-function obtenerListaCanciones() {
 
+function obtenerListaCanciones() {
     return Array.from(document.querySelectorAll('.estado-desbloqueado'))
                 .filter(div => div.style.display !== 'none')
                 .map(div => div.querySelector('audio'))
@@ -55,14 +54,16 @@ function obtenerListaCanciones() {
 
 function playSiguiente(audioActual) {
     const lista = obtenerListaCanciones();
-    if(lista.length <= 1) return; 
+    if(lista.length === 0) return;
 
     let index = lista.indexOf(audioActual);
-    let nextIndex = (index + 1) % lista.length;
+    
+    let nextIndex = (index === lista.length - 1 || index === -1) ? 0 : index + 1;
     const siguienteAudio = lista[nextIndex];
 
     audioActual.pause();
-    audioActual.currentTime = 0;
+    audioActual.currentTime = 0; 
+    
     siguienteAudio.play();
 
     if (document.getElementById('modal-letra').style.display === 'flex') {
@@ -72,15 +73,17 @@ function playSiguiente(audioActual) {
 
 function playAnterior(audioActual) {
     const lista = obtenerListaCanciones();
-    if(lista.length <= 1) return;
+    if(lista.length === 0) return;
 
     let index = lista.indexOf(audioActual);
+    
+
     if (audioActual.currentTime > 3) {
         audioActual.currentTime = 0;
         return;
     }
 
-    let prevIndex = (index - 1 + lista.length) % lista.length;
+    let prevIndex = (index === 0 || index === -1) ? lista.length - 1 : index - 1;
     const prevAudio = lista[prevIndex];
 
     audioActual.pause();
@@ -98,7 +101,6 @@ function actualizarMediaSession(audioElement) {
         if(!card) return;
 
         const titulo = card.querySelector('.track-title').textContent;
-
         const imagenSrc = new URL(card.querySelector('.card-imagen').src, window.location.href).href;
 
         navigator.mediaSession.metadata = new MediaMetadata({
@@ -106,15 +108,38 @@ function actualizarMediaSession(audioElement) {
             artist: 'VENISE',
             album: 'Reveal Disco VENISES',
             artwork: [
-                { src: imagenSrc, sizes: '512x512', type: 'image/jpeg' }
+                { src: imagenSrc, sizes: '96x96', type: 'image/jpeg' },
+                { src: imagenSrc, sizes: '256x256', type: 'image/jpeg' },
+                { src: imagenSrc, sizes: '512x512', type: 'image/jpeg' },
+                { src: imagenSrc }
             ]
         });
 
+     
         navigator.mediaSession.setActionHandler('play', () => audioElement.play());
         navigator.mediaSession.setActionHandler('pause', () => audioElement.pause());
-
         navigator.mediaSession.setActionHandler('previoustrack', () => playAnterior(audioElement));
         navigator.mediaSession.setActionHandler('nexttrack', () => playSiguiente(audioElement));
+
+        navigator.mediaSession.setActionHandler('seekto', (detalles) => {
+            if (detalles.fastSeek && ('fastSeek' in audioElement)) {
+                audioElement.fastSeek(detalles.seekTime);
+            } else {
+                audioElement.currentTime = detalles.seekTime;
+            }
+        });
+    }
+}
+
+function actualizarPosicionMediaSession(audioElement) {
+    if ('mediaSession' in navigator && 'setPositionState' in navigator.mediaSession) {
+        if (!isNaN(audioElement.duration) && audioElement.duration > 0) {
+            navigator.mediaSession.setPositionState({
+                duration: audioElement.duration,
+                playbackRate: audioElement.playbackRate,
+                position: audioElement.currentTime
+            });
+        }
     }
 }
 
@@ -129,6 +154,7 @@ const iconoPauseModal = document.getElementById('icono-pause-modal');
 const barraModal = document.getElementById('barra-progreso-modal');
 const tActualModal = document.getElementById('tiempo-actual-modal');
 const tTotalModal = document.getElementById('tiempo-total-modal');
+
 
 function inicializarReproductores() {
     document.querySelectorAll('.estado-desbloqueado').forEach(contenedor => {
@@ -189,6 +215,8 @@ function inicializarReproductores() {
                 barraModal.style.setProperty('--progreso', `${porcentaje}%`);
                 tActualModal.textContent = tiempoFormateado;
             }
+
+            actualizarPosicionMediaSession(audio);
         });
 
         barra.addEventListener('input', (e) => {
@@ -202,6 +230,7 @@ function inicializarReproductores() {
     });
 }
 inicializarReproductores();
+
 
 const audio7 = document.getElementById('audio-cancion7');
 const btnPlay7 = document.getElementById('btn-play-pause-7');
@@ -248,6 +277,8 @@ audio7.addEventListener('timeupdate', () => {
     if(audioEnModal === audio7) {
         barraModal.value = pct; barraModal.style.setProperty('--progreso', `${pct}%`); tActualModal.textContent = tf;
     }
+
+    actualizarPosicionMediaSession(audio7);
 });
 
 barra7.addEventListener('input', (e) => {
@@ -257,6 +288,7 @@ barra7.addEventListener('input', (e) => {
 audio7.addEventListener('ended', () => {
     playSiguiente(audio7);
 });
+
 
 const modal = document.getElementById('modal-letra');
 const btnCerrar = document.getElementById('cerrar-modal');
@@ -291,7 +323,6 @@ function actualizarModalConAudio(audioElement) {
         iconoPlayModal.style.display = 'none'; iconoPauseModal.style.display = 'block';
     }
 
-    // Inyectar letras
     const trackId = imagenObj.getAttribute('data-track');
     contenedorLetras.innerHTML = ''; 
     if (trackId && letrasData[trackId]) {
@@ -326,6 +357,7 @@ window.addEventListener('click', (e) => {
         audioEnModal = null;
     }
 });
+
 
 btnPlayModal.addEventListener('click', () => {
     if(!audioEnModal) return;
