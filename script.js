@@ -22,7 +22,7 @@ function actualizarCuentaRegresiva() {
 
     document.querySelectorAll('.card-automatica').forEach(card => {
         const timer = card.querySelector('.timer');
-        const esTrack9 = card.querySelector('.card-imagen')?.dataset.track === 'track9';
+        const esTrack9 = card.dataset.track === 'track9';
 
         if (esTrack9) {
             if (distanciaTrack9 < 0) {
@@ -126,18 +126,19 @@ function actualizarMediaSession(audioElement) {
         if(!card) return;
 
         const titulo = card.querySelector('.track-title').textContent;
-        const imagenSrc = new URL(card.querySelector('.card-imagen').src, window.location.href).href;
+        const imagenEl = card.querySelector('.card-imagen');
+        const imagenSrc = imagenEl ? new URL(imagenEl.src, window.location.href).href : '';
 
         navigator.mediaSession.metadata = new MediaMetadata({
             title: titulo,
             artist: 'VENISE',
             album: 'Reveal Disco VENISES',
-            artwork: [
+            artwork: imagenSrc ? [
                 { src: imagenSrc, sizes: '96x96', type: 'image/jpeg' },
                 { src: imagenSrc, sizes: '256x256', type: 'image/jpeg' },
                 { src: imagenSrc, sizes: '512x512', type: 'image/jpeg' },
                 { src: imagenSrc }
-            ]
+            ] : []
         });
 
      
@@ -200,6 +201,9 @@ function inicializarReproductores() {
         });
 
         btn.addEventListener('click', () => {
+            const tieneFuente = (audio.getAttribute('src') || '').trim() !== '';
+            if (!tieneFuente) return;
+
             if (audio.paused) {
                 document.querySelectorAll('audio').forEach(a => a.pause());
                 audio.play();
