@@ -1,6 +1,6 @@
 // const fechaReveal = new Date().getTime() + (1*60*1000);
 const fechaReveal = new Date('August 30, 2026 00:00:00').getTime();
-const fechaUnlockTrack9 = new Date(Date.now() + 50 * 60 * 1000);
+const fechaUnlockTrack9 = new Date(Date.now());
 
 function desbloquearCard(card) {
     card.classList.remove('card-bloqueada');
