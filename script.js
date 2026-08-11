@@ -1,36 +1,62 @@
 // const fechaReveal = new Date().getTime() + (1*60*1000);
 const fechaReveal = new Date('August 30, 2026 00:00:00').getTime();
+const fechaUnlockTrack9 = new Date();
+fechaUnlockTrack9.setHours(20, 0, 0, 0);
+
+function desbloquearCard(card) {
+    card.classList.remove('card-bloqueada');
+    card.classList.add('card-activa', 'activa-brillo');
+
+    const bloqueado = card.querySelector('.estado-bloqueado');
+    const desbloqueado = card.querySelector('.estado-desbloqueado');
+
+    if (bloqueado && desbloqueado) {
+        bloqueado.style.display = 'none';
+        desbloqueado.style.display = 'flex';
+    }
+}
 
 function actualizarCuentaRegresiva() {
     const ahora = new Date().getTime();
     const distancia = fechaReveal - ahora;
+    const distanciaTrack9 = fechaUnlockTrack9.getTime() - ahora;
+
+    document.querySelectorAll('.card-automatica').forEach(card => {
+        const timer = card.querySelector('.timer');
+        const esTrack9 = card.querySelector('.card-imagen')?.dataset.track === 'track9';
+
+        if (esTrack9) {
+            if (distanciaTrack9 < 0) {
+                desbloquearCard(card);
+                return;
+            }
+
+            const horas = Math.floor((distanciaTrack9 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((distanciaTrack9 % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((distanciaTrack9 % (1000 * 60)) / 1000);
+            const textoTiempo = `${horas}h ${minutos}m ${segundos}s`;
+
+            if (timer) timer.textContent = textoTiempo;
+            return;
+        }
+
+        if (distancia < 0) {
+            desbloquearCard(card);
+            return;
+        }
+
+        const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+        const textoTiempo = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+
+        if (timer) timer.textContent = textoTiempo;
+    });
 
     if (distancia < 0) {
-        document.querySelectorAll('.card-automatica').forEach(card => {
-            card.classList.remove('card-bloqueada');
-            card.classList.add('card-activa', 'activa-brillo');
-            
-            const bloqueado = card.querySelector('.estado-bloqueado');
-            const desbloqueado = card.querySelector('.estado-desbloqueado');
-            
-            if (bloqueado && desbloqueado) {
-                bloqueado.style.display = 'none';
-                desbloqueado.style.display = 'flex';
-            }
-        });
-        inicializarReproductores(); 
-        return; 
+        inicializarReproductores();
     }
-
-    const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
-    const textoTiempo = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
-
-    document.querySelectorAll('.timer').forEach(timer => {
-        timer.textContent = textoTiempo;
-    });
 }
 
 setInterval(actualizarCuentaRegresiva, 1000);
