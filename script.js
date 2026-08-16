@@ -82,13 +82,13 @@ function playSiguiente(audioActual) {
     if(lista.length === 0) return;
 
     let index = lista.indexOf(audioActual);
-    
+
     let nextIndex = (index === lista.length - 1 || index === -1) ? 0 : index + 1;
     const siguienteAudio = lista[nextIndex];
 
     audioActual.pause();
-    audioActual.currentTime = 0; 
-    
+    audioActual.currentTime = 0;
+
     siguienteAudio.play();
 
     if (document.getElementById('modal-letra').style.display === 'flex') {
@@ -101,7 +101,7 @@ function playAnterior(audioActual) {
     if(lista.length === 0) return;
 
     let index = lista.indexOf(audioActual);
-    
+
 
     if (audioActual.currentTime > 3) {
         audioActual.currentTime = 0;
@@ -141,7 +141,7 @@ function actualizarMediaSession(audioElement) {
             ] : []
         });
 
-     
+
         navigator.mediaSession.setActionHandler('play', () => audioElement.play());
         navigator.mediaSession.setActionHandler('pause', () => audioElement.pause());
         navigator.mediaSession.setActionHandler('previoustrack', () => playAnterior(audioElement));
@@ -170,7 +170,7 @@ function actualizarPosicionMediaSession(audioElement) {
 }
 
 
-let audioEnModal = null; 
+let audioEnModal = null;
 
 const imgModal = document.querySelector('.modal-imagen-grande');
 const tituloModal = document.querySelector('.modal-titulo');
@@ -185,7 +185,7 @@ const tTotalModal = document.getElementById('tiempo-total-modal');
 function inicializarReproductores() {
     document.querySelectorAll('.estado-desbloqueado').forEach(contenedor => {
         const audio = contenedor.querySelector('audio');
-        
+
         if (!audio || audio.hasAttribute('data-inicializado') || audio.id === 'audio-cancion7') return;
         audio.setAttribute('data-inicializado', 'true');
 
@@ -213,20 +213,20 @@ function inicializarReproductores() {
         });
 
         audio.addEventListener('play', () => {
-            iconoPlay.style.display = 'none'; 
+            iconoPlay.style.display = 'none';
             iconoPause.style.display = 'block';
             if(audioEnModal === audio) {
-                iconoPlayModal.style.display = 'none'; 
+                iconoPlayModal.style.display = 'none';
                 iconoPauseModal.style.display = 'block';
             }
             actualizarMediaSession(audio);
         });
 
         audio.addEventListener('pause', () => {
-            iconoPlay.style.display = 'block'; 
+            iconoPlay.style.display = 'block';
             iconoPause.style.display = 'none';
             if(audioEnModal === audio) {
-                iconoPlayModal.style.display = 'block'; 
+                iconoPlayModal.style.display = 'block';
                 iconoPauseModal.style.display = 'none';
             }
         });
@@ -234,7 +234,7 @@ function inicializarReproductores() {
         audio.addEventListener('timeupdate', () => {
             const porcentaje = (audio.currentTime / audio.duration) * 100 || 0;
             const tiempoFormateado = formatearTiempo(audio.currentTime);
-            
+
             barra.value = porcentaje;
             barra.style.setProperty('--progreso', `${porcentaje}%`);
             tActual.textContent = tiempoFormateado;
@@ -302,7 +302,7 @@ audio7.addEventListener('timeupdate', () => {
     const pct = (audio7.currentTime / audio7.duration) * 100 || 0;
     const tf = formatearTiempo(audio7.currentTime);
     barra7.value = pct; barra7.style.setProperty('--progreso', `${pct}%`); tActual7.textContent = tf;
-    
+
     if(audioEnModal === audio7) {
         barraModal.value = pct; barraModal.style.setProperty('--progreso', `${pct}%`); tActualModal.textContent = tf;
     }
@@ -335,7 +335,7 @@ function actualizarModalConAudio(audioElement) {
     if(!cardInfo || !estadoDesbloqueado) return;
 
     const imagenObj = estadoDesbloqueado.querySelector('.card-imagen');
-    
+
     audioEnModal = audioElement;
     imgModal.src = imagenObj.src;
     tituloModal.textContent = cardInfo.querySelector('.track-title').textContent;
@@ -353,11 +353,11 @@ function actualizarModalConAudio(audioElement) {
     }
 
     const trackId = imagenObj.getAttribute('data-track');
-    contenedorLetras.innerHTML = ''; 
+    contenedorLetras.innerHTML = '';
     if (trackId && letrasData[trackId]) {
         letrasData[trackId].forEach(parrafo => {
             const p = document.createElement('p');
-            p.innerHTML = parrafo; 
+            p.innerHTML = parrafo;
             contenedorLetras.appendChild(p);
         });
     } else {
@@ -376,8 +376,8 @@ document.addEventListener('click', (e) => {
 
 btnCerrar.addEventListener('click', () => {
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; 
-    audioEnModal = null; 
+    document.body.style.overflow = 'auto';
+    audioEnModal = null;
 });
 window.addEventListener('click', (e) => {
     if (e.target === modal) {

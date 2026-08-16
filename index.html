@@ -3,20 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REVEAL DISCO VENISES</title>
-        <meta property="og:title" content="¡Reveal de VENISE!">
-        <meta property="og:description" content="Entra para descubrir el nuevo disco que hemos creado. ¡Ya casi es la hora!">
-        <meta property="og:image" content="https://bernatbgg9.github.io/VeniseReveal/"> 
-        <meta property="og:type" content="website">
+    <title>VENISE | Reveal</title>
+    <meta name="description" content="Una experiencia visual inmersiva para el reveal de VENISE. Tracklist anunciado el lunes 24.">
+    <meta property="og:title" content="VENISE | Reveal">
+    <meta property="og:description" content="Una experiencia visual inmersiva para el reveal de VENISE. Tracklist anunciado el lunes 24.">
+    <meta property="og:image" content="https://bernatbgg9.github.io/VeniseReveal/">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#050816">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div class="contenedor-principal">
-        <h1 class="titulo-pagina">VENISE</h1>
+    <div class="page-shell">
+        <main class="contenedor-principal">
+            <section class="hero">
+                <div class="hero-copy">
+                    <p class="hero-eyebrow">VENISE REVEAL</p>
+                    <h1 class="titulo-pagina">VENISE</h1>
+                    <p class="hero-lead">Un lanzamiento con estética nocturna, pulida y cinematográfica. Cada pista se descubre como una pieza de identidad.</p>
+                    <div class="hero-pills">
+                        <span class="pill pill-accent">Tracklist anunciado el lunes 24</span>
+                        <span class="pill">Reveal en tiempo real</span>
+                        <span class="pill">Diseño inmersivo</span>
+                    </div>
+                </div>
+                <div class="hero-card">
+                    <div class="hero-card-top">
+                        <span class="hero-label">Estado</span>
+                        <span class="hero-status">Live reveal</span>
+                    </div>
+                    <div class="hero-card-body">
+                        <span class="hero-number">11</span>
+                        <p>Una portada pensada para generar expectativa, con contraste fuerte, vidrio ahumado y una lectura más premium.</p>
+                    </div>
+                </div>
+            </section>
 
-        <div class="grid-canciones">
-            
+            <div class="grid-canciones">
+
             <div class="card card-bloqueada card-automatica">
                 <div class="estado-bloqueado">
                     <span class="numero-track">1</span>
@@ -276,17 +302,18 @@
                 </div>
             </div>
 
-        </div>
+            </div>
+        </main>
     </div>
 
     <div id="modal-letra" class="modal-fondo">
         <div class="modal-contenido">
             <button id="cerrar-modal" class="btn-cerrar">&times;</button>
-            
+
             <div class="modal-izq">
                 <img src="caratula7.jpg" alt="Carátula Grande" class="modal-imagen-grande">
                 <h2 class="modal-titulo">La Noticia - Remix</h2>
-                
+
                 <div class="reproductor-custom reproductor-modal">
                     <button id="btn-play-pause-modal" class="btn-circular">
                         <svg id="icono-play-modal" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
